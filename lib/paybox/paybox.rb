@@ -68,7 +68,7 @@ module Paybox
         :PAYS         => "FR"
       }
 
-      response = self.class.post(PROCESS_PATH, :body => data)
+      response = _process data
 
       # Now we've got a response, let's parse it
       self.transaction = Transaction.new.tap do |trans|
