@@ -10,6 +10,24 @@ In your Gemfile :
     gem 'paybox'
 
 
+Usage
+-----
+
+    response = Paybox.new(
+      :operation => '00057',
+      :amount => 1000,
+      :user_id => your_db_customer/suscriber_account_id,
+      :card_nbr => card_number_or_encrypted_alias,
+      :expire => card_expiration_date (mmyy),
+      :cvv2 => card_cvv2_code (3 digits)
+    )
+
+Then you can read response like this, for instance :
+
+    response.coderesponse = '00000' # =>  Cool, successful request
+or
+    response.commentaire = "PAYBOX : Numéro de porteur invalide" # =>  Oooops, invalid card number given
+
 Todo
 ----
 

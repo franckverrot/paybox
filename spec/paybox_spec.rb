@@ -2,13 +2,24 @@ require File.join(File.dirname(__FILE__), 'spec_helper.rb')
 
 TEST_DATA = {
   :user_id  => 1,
-  :card_nbr => 'foobar',
+  :card_nbr => '4111 1111 1111 1111',
   :expire   => '1012',
   :cvv2     => '123'
 }
 
 describe "Paybox" do
   before(:each) do
+    Paybox::Paybox.configure do |configuration|
+      configuration.site = '1999888'
+      configuration.rang = '99'
+      configuration.cle  = '1999888I'
+    end
+  end
+
+  it "can be configured" do
+    Paybox::Paybox.site.should == '1999888'
+    Paybox::Paybox.rang.should == '99'
+    Paybox::Paybox.cle.should  == '1999888I'
   end
 
   it "initializes itself and post the data to the GW" do
@@ -21,10 +32,7 @@ describe "Paybox" do
       :cvv2      => TEST_DATA[:cvv2]
     )
 
-    response = paybox.authorize
-
-    response.codereponse.should == '00000' #=> Cool, successful request
-    # response.commentaire = "PAYBOX : Numéro de porteur invalide" #=> Oooops, invalid card number given
-
+    paybox.process.should be(true)
+    paybox.transaction.codereponse.should == '00000' #=> Cool, successful request
   end
 end

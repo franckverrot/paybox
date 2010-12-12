@@ -7,7 +7,7 @@ RSpec.configure do |config|
   config.before :all do
     FakeWeb.register_uri(
       :post,
-      %r{https://preprod-ppps.paybox.com/PPPS.php},
+      'https://preprod-ppps.paybox.com/PPPS.php',
       :body => File.read(File.join(File.dirname(__FILE__), 'fixtures', 'PPPS.php'))
     )
   end
