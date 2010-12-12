@@ -15,7 +15,9 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "paybox"
 
   s.add_dependency 'activesupport'
+  s.add_dependency 'activemodel'
   s.add_dependency 'i18n'
+  s.add_dependency 'httparty'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rspec'

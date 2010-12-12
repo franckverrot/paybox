@@ -12,7 +12,7 @@ describe "Paybox" do
   end
 
   it "initializes itself and post the data to the GW" do
-    response = Paybox::Paybox.new(
+    paybox = Paybox::Paybox.new(
       :operation => '00057',
       :amount    => 1000,
       :user_id   => TEST_DATA[:user_id],
@@ -20,6 +20,8 @@ describe "Paybox" do
       :expire    => TEST_DATA[:expire],
       :cvv2      => TEST_DATA[:cvv2]
     )
+
+    response = paybox.authorize
 
     response.codereponse.should == '00000' #=> Cool, successful request
     # response.commentaire = "PAYBOX : Numéro de porteur invalide" #=> Oooops, invalid card number given

@@ -1,3 +1,4 @@
+require 'fakeweb'
 require 'paybox'
 
 RSpec.configure do |config|
